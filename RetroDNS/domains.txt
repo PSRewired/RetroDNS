@@ -1,0 +1,3 @@
+resistancegs.ps3.online.scea.com=67.222.156.250
+*.psrewired.com=67.222.156.250
+*=8.8.8.8
