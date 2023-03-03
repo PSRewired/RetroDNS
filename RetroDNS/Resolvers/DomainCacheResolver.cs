@@ -1,11 +1,10 @@
-using System.Net;
 using Serilog;
 
 namespace RetroDNS.Resolvers;
 
 public class DomainCacheResolver
 {
-    private static readonly Dictionary<string, string> _registeredDomains = new();
+    private static readonly Dictionary<string, ResolverEntry> _registeredDomains = new();
 
     /// <summary>
     /// Registers all routes from a file
@@ -51,7 +50,7 @@ public class DomainCacheResolver
     /// <param name="dnsServerIp"></param>
     public void AddDomain(string domainName, string dnsServerIp)
     {
-        _registeredDomains[domainName] = dnsServerIp;
+        _registeredDomains[domainName] = ResolverEntry.FromFqdn(dnsServerIp);
     }
 
     /// <summary>
@@ -60,16 +59,19 @@ public class DomainCacheResolver
     /// <param name="domainName">A domain name or IP address to find in the lookup table</param>
     /// <returns>IPEndpoint that represents the configured DNS server for the matched entry</returns>
     /// <exception cref="ArgumentException">When no variant of the domain was found</exception>
-    public IPEndPoint FindDomain(string domainName)
+    public ResolverEntry ResolveDomain(string domainName)
     {
         var matchableDomainNames = BuildWildcardDomains(domainName);
 
         foreach (var domain in matchableDomainNames)
         {
-            if (_registeredDomains.TryGetValue(domain, out var dnsServer))
+            if (!_registeredDomains.TryGetValue(domain, out var dnsServer))
             {
-                return new IPEndPoint(IPAddress.Parse(dnsServer), 53);
+                continue;
             }
+
+            Log.Debug("Matched resolution entry for {Domain}: {Entry}", domain, dnsServer);
+            return dnsServer;
         }
 
         throw new ArgumentException($"Could not find a registered domain for {domainName}");
@@ -77,14 +79,14 @@ public class DomainCacheResolver
 
     private static string[] BuildWildcardDomains(string domain)
     {
-        Log.ForContext<DomainCacheResolver>().Debug("Building wildcard domains for: {Domain}", domain);
+        Log.ForContext<DomainCacheResolver>().Verbose("Building wildcard domains for: {Domain}", domain);
 
-        // Hack to make the C# URI parser work 
+        // Hack to make the C# URI parser work
         if (!domain.StartsWith("http"))
         {
             domain = $"http://{domain}";
         }
-        
+
         var uri = new Uri(domain);
         var host = uri.DnsSafeHost;
 

@@ -28,7 +28,7 @@ public class DnsServer
     private DnsServer(string address, int port) : this(IPAddress.Parse(address), port)
     {
     }
-    
+
     private DnsServer(IPAddress address, int port)
     {
         EndPoint = new IPEndPoint(address, port);
@@ -41,7 +41,7 @@ public class DnsServer
         _packetForwarder = packetForwarder;
         _domainResolver = domainResolver;
     }
-    
+
     public void Start()
     {
         if (_tokenSource != null)
@@ -59,7 +59,7 @@ public class DnsServer
         Log.Information("Stopping RetroDNS...");
         _tokenSource?.Cancel();
     }
-    
+
     private async Task Listen()
     {
         _udpListener = new Socket(SocketType.Dgram, ProtocolType.Udp);
@@ -119,7 +119,7 @@ public class DnsServer
         Log.Information("[{ClsName}] UDP receive thread stopped", GetType().Name);
         _udpListener.Dispose();
     }
-    
+
     private async Task HandleReceive(Memory<byte> buffer, EndPoint ep)
     {
         try
@@ -140,17 +140,17 @@ public class DnsServer
                 Log.Error("Received invalid DNS query\n{Packet}", buffer.ToHexDump());
                 return;
             }
-            
+
             var question = Question.FromBytes(buffer[headerBytes..].ToArray());
 
             try
             {
-                var resolvedDomainAddress = _domainResolver.FindDomain(question.Domain);
-                var dnsResponse = await _packetForwarder.SendDnsQuery(resolvedDomainAddress, buffer.ToArray());
+                var resolvedDomainAddress = _domainResolver.ResolveDomain(question.Domain);
+                var dnsResponse = await _packetForwarder.AnswerQuery(resolvedDomainAddress, dnsHeader, question);
 
                 if (dnsResponse.Length < 1)
                 {
-                    Log.Error("Failed to get a valid response from the requested DNS server");
+                    Log.Error($"Failed to get a valid response message for {question.Domain}");
                     return;
                 }
 

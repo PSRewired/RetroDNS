@@ -1,3 +1,4 @@
-resistancegs.ps3.online.scea.com=67.222.156.250
-*.psrewired.com=67.222.156.250
-*=8.8.8.8
+resistancegs.ps3.online.scea.com=ip://67.222.156.250
+*.psrewired.com=dns://67.222.156.250
+*.myresistance.net=ip://192.168.1.52
+*=dns://8.8.8.8
