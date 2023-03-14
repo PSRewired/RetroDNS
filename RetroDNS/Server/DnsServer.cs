@@ -124,8 +124,9 @@ public class DnsServer
     {
         try
         {
-            Log.Debug("[{Class}] DNS packet received from ({IpAddress}:{Port})\n {PacketData}", GetType().Name,
-                ((IPEndPoint)ep).Address.MapToIPv4(), ((IPEndPoint)ep).Port, buffer.ToHexDump());
+            Log.Debug("[{Class}] DNS packet received from ({IpAddress}:{Port})", GetType().Name,
+                ((IPEndPoint)ep).Address.MapToIPv4(), ((IPEndPoint)ep).Port);
+            Log.Verbose("{PacketData}", buffer.ToHexDump());
 
             var headerBytes = Marshal.SizeOf<DnsHeader>();
             if (buffer.Length < headerBytes)
@@ -154,7 +155,7 @@ public class DnsServer
                     return;
                 }
 
-                Log.Debug("Forwarding DNS response: \n{ResponsePacket}", dnsResponse.ToHexDump());
+                Log.Verbose("Forwarding DNS response: \n{ResponsePacket}", dnsResponse.ToHexDump());
 
                 await _udpListener.SendToAsync(dnsResponse, ep);
             }

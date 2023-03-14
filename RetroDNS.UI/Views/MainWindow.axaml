@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RetroDNS.UI.ViewModels"
+        Height="300" Width="650"
+        x:Class="RetroDNS.UI.Views.MainWindow"
+        x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+        Title="RetroDNS"
+        TransparencyLevelHint="AcrylicBlur"
+        CanResize="False"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        ExtendClientAreaToDecorationsHint="True"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Background>
+        <ImageBrush Source="../Assets/bg.jpg" Stretch="Fill"/>
+    </Window.Background>
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <TabControl Margin="0, 25, 0,0">
+        <TabItem Header="Configuration">
+            <StackPanel Spacing="10" Margin="0, 10, 0, 0">
+                <TextBlock Text="PC Network Adapter:"/>
+                <ComboBox x:Name="networkAdapters" SelectedIndex="{Binding SelectedAdapter}"
+                          Items="{Binding Adapters}" HorizontalContentAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Width="200"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <StackPanel Spacing="10" Margin="0,30,0,0">
+                    <TextBlock Text="Enter the following IP into your Console/Device" TextAlignment="Center"/>
+                    <TextBlock Text="192.168.1.52" FontSize="18" FontWeight="Bold" TextAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Log">
+        </TabItem>
+    </TabControl>
+</Window>
+

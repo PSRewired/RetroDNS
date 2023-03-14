@@ -104,7 +104,7 @@ public class DomainCacheResolver
         for (var i = 1; i < domains.Length - 1; i++)
         {
             domains[i] = $"*.{string.Join('.', hostParts[i..])}";
-            Log.Debug("\t[{VariantNumber}]: {GeneratedDomain}", i, domains[i]);
+            Log.Verbose("\t[{VariantNumber}]: {GeneratedDomain}", i, domains[i]);
         }
 
         return domains;

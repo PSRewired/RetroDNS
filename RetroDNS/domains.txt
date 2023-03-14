@@ -1,4 +1,7 @@
 resistancegs.ps3.online.scea.com=ip://67.222.156.250
+secure.cprod.homeps3.online.scee.com=dns://185.194.142.4
+*.ps3.online.scea.com=ip://192.168.1.52
+*.online.scee.com=ip://192.168.1.52
 *.psrewired.com=dns://67.222.156.250
 *.myresistance.net=ip://192.168.1.52
 *=dns://8.8.8.8
