@@ -60,4 +60,18 @@ public class DnsPacketForwarder
 
         return result.Buffer;
     }
+
+    public async Task<byte[]> SendDnsQuery(ResolverEntry resolverEntry, byte[] stuff)
+    {
+        Log.Debug("Forwarding DNS query to {Endpoint}", resolverEntry);
+
+        var client = new UdpClient(resolverEntry.Host.ToString(), 53);
+
+        await client.SendAsync(stuff);
+
+        var result = await client.ReceiveAsync()
+            .WaitAsync(TimeSpan.FromSeconds(5)); // This timeout is probably too long
+
+        return result.Buffer;
+    }
 }

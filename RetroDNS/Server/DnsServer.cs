@@ -102,14 +102,6 @@ public class DnsServer
             {
                 break;
             }
-            catch (InvalidOperationException)
-            {
-                break;
-            }
-            catch (SocketException)
-            {
-                break;
-            }
             catch (Exception e)
             {
                 Log.ForContext<DnsServer>().Error(e, "Error in listen loop");
@@ -147,7 +139,16 @@ public class DnsServer
             try
             {
                 var resolvedDomainAddress = _domainResolver.ResolveDomain(question.Domain);
-                var dnsResponse = await _packetForwarder.AnswerQuery(resolvedDomainAddress, dnsHeader, question);
+
+                byte[] dnsResponse;
+                if (resolvedDomainAddress.Type == ResolverEntry.ResolutionType.Dns)
+                {
+                    dnsResponse = await _packetForwarder.SendDnsQuery(resolvedDomainAddress, buffer.ToArray());
+                }
+                else
+                {
+                    dnsResponse = await _packetForwarder.AnswerQuery(resolvedDomainAddress, dnsHeader, question);
+                }
 
                 if (dnsResponse.Length < 1)
                 {
