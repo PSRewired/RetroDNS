@@ -35,11 +35,6 @@ public partial class MainWindow : Window
         {
             serverService.Stop();
         }
-
-        if (serverService.IsActive)
-        {
-            serverService.Stop();
-        }
         else
         {
             serverService.Start(model.SelectedAdapterAddress);
