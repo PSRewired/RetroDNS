@@ -72,6 +72,7 @@ public class DnsServer
         catch (Exception e)
         {
             Log.Fatal(e, "[{ServerName}] Error while starting listener", GetType().Name);
+            return;
         }
 
         Log.Information("RetroDNS is ready for use. Please enter your game DNS IP as {IPAddress}", EndPoint.Address.ToString());

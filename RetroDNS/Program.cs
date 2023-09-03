@@ -16,8 +16,8 @@ serviceCollection.Configure<DnsServerConfiguration>(o =>
 });
 
 serviceCollection.AddSingleton<DomainCacheResolver>();
-serviceCollection.AddSingleton<DnsServer>();
 serviceCollection.AddScoped<DnsPacketForwarder>();
+serviceCollection.AddSingleton<DnsServer>();
 
 var services = serviceCollection.BuildServiceProvider();
 

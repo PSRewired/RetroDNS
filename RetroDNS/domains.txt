@@ -1,9 +1,12 @@
 resistancegs.ps3.online.scea.com=ip://67.222.156.250
 muis.cprod.homeps3.online.scee.com=ip://192.168.1.52
+starhawk-prod2.svo.online.scea.com=ip://192.168.1.52
 secure.cprod.homeps3.online.scee.com=dns://52.86.120.101
 secure.cdevb.homeps3.online.scee.com=dns://52.86.120.101
+*.dothackers.org=ip://192.168.1.52
 *.destinationhome.live=dns://52.86.120.101
 *.ps3.online.scea.com=ip://192.168.1.52
+*.sync.online.scea.com=ip://192.168.1.52
 *.online.scee.com=ip://192.168.1.52
 *.psrewired.com=dns://67.222.156.250
 *.myresistance.net=ip://192.168.1.52
