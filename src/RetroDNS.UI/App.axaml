@@ -1,0 +1,16 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:RetroDNS.UI"
+             xmlns:converters="clr-namespace:RetroDNS.UI.Converters"
+             x:Class="RetroDNS.UI.App">
+    <Application.Resources>
+        <converters:StringArrayConverter x:Key="stringArrayConverter" />
+    </Application.Resources>
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

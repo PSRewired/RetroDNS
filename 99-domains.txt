@@ -1,0 +1,2 @@
+# Catch any undefined requests and forward them to PSRewired
+*=dns://67.222.156.250

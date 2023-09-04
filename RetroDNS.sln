@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroDNS", "src\RetroDNS\RetroDNS.csproj", "{C56D1FBD-2EAD-4AD4-8F87-B0F76FDF7577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroDNS.UI", "src\RetroDNS.UI\RetroDNS.UI.csproj", "{CE212E78-1EAD-4F18-B19E-3BBFE7089426}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C56D1FBD-2EAD-4AD4-8F87-B0F76FDF7577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56D1FBD-2EAD-4AD4-8F87-B0F76FDF7577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56D1FBD-2EAD-4AD4-8F87-B0F76FDF7577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56D1FBD-2EAD-4AD4-8F87-B0F76FDF7577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE212E78-1EAD-4F18-B19E-3BBFE7089426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE212E78-1EAD-4F18-B19E-3BBFE7089426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE212E78-1EAD-4F18-B19E-3BBFE7089426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE212E78-1EAD-4F18-B19E-3BBFE7089426}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
