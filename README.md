@@ -12,9 +12,14 @@ of the filename. (Ex: 00-domains.txt will load before any other file)
 **Note: The names of these files may post-fixed with any designator that you choose (Ex: 05-domains_openspy.txt)**
 Ex:
 ```text
-api.psrewired.com
-*.psrewired.com
-*
+# Example to respond with an explicit IP address
+api.psrewired.com=ip://129.168.0.123 
+
+# Example to forward PSRewired sub-domains to their DNS server
+*.psrewired.com=dns://67.222.156.250
+
+# Example to foward all other requests to Google DNS
+*=dns://8.8.8.8
 ```
 which would allow you to define wildcards to any domain/subdomain for convenience.
 
