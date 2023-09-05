@@ -9,8 +9,19 @@ By default, domains are split into wildcards until they are funneled down to a s
 If needed, you may specify multiple domain files. They are loaded in priority based on the optional number appended to the beginning
 of the filename. (Ex: 00-domains.txt will load before any other file)
 
+
 **Note: The names of these files may post-fixed with any designator that you choose (Ex: 05-domains_openspy.txt)**
+
+
 Ex:
+```text
+RetroDNS/
+    - RetroDNS.exe
+    - RetroDNS.UI.exe
+    - 01-domains_ps3.txt
+    - 99-domains.txt
+```
+Domain file formatting example:
 ```text
 # Example to respond with an explicit IP address
 api.psrewired.com=ip://129.168.0.123 
@@ -21,7 +32,6 @@ api.psrewired.com=ip://129.168.0.123
 # Example to foward all other requests to Google DNS
 *=dns://8.8.8.8
 ```
-which would allow you to define wildcards to any domain/subdomain for convenience.
 
 ### Running the app via the command line
 - Define any domains via the instructions above
