@@ -1,6 +1,8 @@
 # RetroDNS
 A simple DNS proxy server to help people who cannot connect to third-party DNS servers
 
+![image](https://github.com/PSRewired/RetroDNS/assets/1065472/80c76da8-8127-4b86-99ce-acbea4a874f6)
+
 ## Usage
 ### Adding domain entries
 Edit [99-domains.txt](99-domains.txt) and add any records that require a proxy.
