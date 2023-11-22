@@ -1,6 +1,8 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Logging;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,8 @@ using RetroDNS.UI.Logging;
 using RetroDNS.UI.Services;
 using RetroDNS.UI.ViewModels;
 using Serilog;
+using Serilog.Core;
+using LogEventLevel = Serilog.Events.LogEventLevel;
 
 namespace RetroDNS.UI.Views;
 

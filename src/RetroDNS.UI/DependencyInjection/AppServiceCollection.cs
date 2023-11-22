@@ -7,6 +7,7 @@ using RetroDNS.UI.Logging;
 using RetroDNS.UI.Services;
 using RetroDNS.UI.ViewModels;
 using Serilog;
+using Serilog.Core;
 
 namespace RetroDNS.UI.DependencyInjection;
 
@@ -27,7 +28,11 @@ public class AppServiceCollection
         var avaloniaSink = new AvaloniaSink();
         services.AddSingleton(avaloniaSink);
 
+        var logLevelSwitch = new LoggingLevelSwitch();
+        services.AddSingleton(logLevelSwitch);
+
         var logger = new LoggerConfiguration()
+            .MinimumLevel.ControlledBy(logLevelSwitch)
             .WriteTo.Debug()
             .WriteTo.Sink(avaloniaSink)
             .CreateLogger();

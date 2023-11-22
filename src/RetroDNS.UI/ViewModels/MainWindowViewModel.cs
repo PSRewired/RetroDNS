@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -6,6 +7,9 @@ using ReactiveUI;
 using System.Reactive.Concurrency;
 using MediatR;
 using RetroDNS.Queries.Network;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace RetroDNS.UI.ViewModels;
 
@@ -57,12 +61,27 @@ public class MainWindowViewModel : ViewModelBase
         .First(a => a.Address.AddressFamily == AddressFamily.InterNetwork).Address.ToString();
 
     public bool HasAdapters => Adapters.Count > 0;
+    public string[] LogLevels => Enum.GetNames(typeof(LogEventLevel));
 
-    public MainWindowViewModel(IMediator mediator)
+    private int _loglevelIdx = (int)LogEventLevel.Information;
+
+    public int LogLevelIdx
+    {
+        get => _loglevelIdx;
+        set => this.RaiseAndSetIfChanged(ref _loglevelIdx, value);
+    }
+
+    public MainWindowViewModel(IMediator mediator, LoggingLevelSwitch levelSwitch)
     {
         _mediator = mediator;
 
         RxApp.MainThreadScheduler.Schedule(LoadNetworkAdapters);
+        this.WhenAnyValue(p => p.LogLevelIdx)
+            .Subscribe(v =>
+            {
+                levelSwitch.MinimumLevel = (LogEventLevel)v;
+                Log.Warning("Log level was updated to {LogLevel}", levelSwitch.MinimumLevel);
+            });
     }
 
 
