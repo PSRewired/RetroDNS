@@ -34,7 +34,7 @@ jobs:
                   release_name="RetroDNS-$tag-${{ matrix.target }}"
 
                   # Build everything
-                  dotnet publish src/RetroDNS.UI/RetroDNS.UI.csproj --self-contained --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+                  dotnet publish src/RetroDNS.UI/RetroDNS.UI.csproj --self-contained --runtime "${{ matrix.target }}" -c Release -o "$release_name" -p:PublishSingleFile=true
 
                   # Pack files
                   if [ "${{ matrix.target }}" == "win-x64" ]; then
